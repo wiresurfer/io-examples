@@ -1,0 +1,96 @@
+{
+    "apiVersion":"1.0.0",
+    "name":"fleet_telepresence_server",
+    "packageVersion":"v1.0.1",
+    "description":"",
+    "bindable":true,
+    "plans":[
+       {
+          "name":"default",
+          "metadata":{
+             
+          },
+          "singleton":false,
+          "components":[
+             {
+                "name":"KMS_Server",
+                "description":"",
+                "cloudInfra":{
+                   "replicas":1,
+                   "endpoints":[
+                      {
+                         "name":"kurento_ws",
+                         "exposeExternally":true,
+                         "port":80,
+                         "targetPort":8080,
+                         "proto":"HTTP"
+                      }
+                   ]
+                },
+                "ros":{
+                   "topics":[
+                      
+                   ],
+                   "services":[
+                      
+                   ],
+                   "actions":[
+                      
+                   ],
+                   "isROS":false
+                },
+                "requiredRuntime":"cloud",
+                "architecture":"amd64",
+                "executables":[
+                   {
+                      "name":"kms",
+                      "simulationOptions":{
+                         "simulation":false
+                      },
+                      "cmd":[
+                         
+                      ],
+                      "docker":"kurento/kurento-media-server",
+                      "limits":{
+                         "cpu":1,
+                         "memory":4096
+                      }
+                   }
+                ],
+                "parameters":[
+                   {
+                      "default":"19302",
+                      "name":"KMS_STUN_PORT",
+                      "description":""
+                   },
+                   {
+                      "default":"stun.l.google.com",
+                      "name":"KMS_STUN_IP",
+                      "description":""
+                   }
+                ]
+             }
+          ],
+          "includePackages":[
+             
+          ],
+          "dependentDeployments":[
+             
+          ],
+          "inboundROSInterfaces":{
+             "topics":[
+                
+             ],
+             "services":[
+                
+             ],
+             "actions":[
+                
+             ]
+          },
+          "exposedParameters":[
+             
+          ]
+       }
+    ]
+ }

@@ -1,0 +1,42 @@
+---
+name: pvc-viewer
+packageVersion: v1.0.1
+description: ''
+bindable: true
+plans:
+- name: default
+  metadata: {}
+  singleton: false
+  components:
+  - name: filebrowser
+    description: ''
+    cloudInfra:
+      replicas: 1
+      endpoints:
+      - name: filebrowser
+        exposeExternally: true
+        port: 443
+        targetPort: 8080
+        proto: HTTPS
+    ros:
+      topics: []
+      services: []
+      actions: []
+      isROS: false
+    requiredRuntime: cloud
+    architecture: amd64
+    executables:
+    - name: filebrowser
+      simulationOptions:
+        simulation: false
+      cmd: []
+      docker: shaishavrapyuta/pvc-viewer
+      limits:
+        cpu: 1
+        memory: 4096
+    parameters: []
+  includePackages: []
+  dependentDeployments: []
+  inboundROSInterfaces:
+    anyIncomingScopedOrTargetedRosConfig: false
+  exposedParameters: []

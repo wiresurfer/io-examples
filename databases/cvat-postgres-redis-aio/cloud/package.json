@@ -1,0 +1,116 @@
+{
+    "name":"cvat_db_redis",
+    "packageVersion":"v1.0.2",
+    "description":"",
+    "bindable":true,
+    "plans":[
+       {
+          "name":"default",
+          "metadata":{
+             
+          },
+          "singleton":false,
+          "components":[
+             {
+                "name":"postgres",
+                "description":"",
+                "cloudInfra":{
+                   "replicas":1,
+                   "endpoints":[
+                      {
+                         "name":"CVAT_POSTGRES",
+                         "exposeExternally":false,
+                         "proto":"TCP",
+                         "portRange":"5432"
+                      },
+                      {
+                         "name":"CVAT_REDIS",
+                         "exposeExternally":false,
+                         "proto":"TCP",
+                         "portRange":"6379"
+                      }
+                   ]
+                },
+                "ros":{
+                   "topics":[
+                      
+                   ],
+                   "services":[
+                      
+                   ],
+                   "actions":[
+                      
+                   ],
+                   "isROS":false
+                },
+                "requiredRuntime":"cloud",
+                "architecture":"amd64",
+                "executables":[
+                   {
+                      "name":"redis",
+                      "simulationOptions":{
+                         "simulation":false
+                      },
+                      "cmd":[
+                         
+                      ],
+                      "docker":"redis:4.0-alpine",
+                      "limits":{
+                         "cpu":0.5,
+                         "memory":2048
+                      }
+                   },
+                   {
+                      "name":"postgres",
+                      "simulationOptions":{
+                         "simulation":false
+                      },
+                      "cmd":[
+                         
+                      ],
+                      "docker":"postgres:10-alpine",
+                      "limits":{
+                         "cpu":1,
+                         "memory":4096
+                      }
+                   }
+                ],
+                "parameters":[
+                   {
+                      "default":"/var/lib/postgresql/data/pgdata",
+                      "name":"PGDATA",
+                      "description":""
+                   },
+                   {
+                      "default":"trust",
+                      "name":"POSTGRES_HOST_AUTH_METHOD",
+                      "description":""
+                   },
+                   {
+                      "default":"cvat",
+                      "name":"POSTGRES_DB",
+                      "description":""
+                   },
+                   {
+                      "default":"root",
+                      "name":"POSTGRES_USER",
+                      "description":""
+                   }
+                ]
+             }
+          ],
+          "includePackages":[
+             
+          ],
+          "dependentDeployments":[
+             
+          ],
+          "inboundROSInterfaces":{
+             "anyIncomingScopedOrTargetedRosConfig":false
+          },
+          "exposedParameters":[
+             
+          ]
+       }
+    ]
+ }

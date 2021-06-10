@@ -1,0 +1,97 @@
+{
+    "name":"redis",
+    "packageVersion":"v1.0.5",
+    "description":"Disclaimer: REDIS(r) is a registered trademark of Redis Labs Ltd.Any rights therein are reserved to Redis Labs Ltd. Any use by rapyuta.io is for referential purposes only and does not indicate any sponsorship, endorsement, or affiliation between Redis Labs Ltd.Redis(TM) is an advanced key-value cache and store. It is often referred to as a data structure server since keys can contain strings, hashes, lists, sets, sorted sets, bitmaps and hyperloglogs.visit http://redis.io  for further details",
+    "bindable":true,
+    "plans":[
+       {
+          "name":"default",
+          "metadata":{
+             
+          },
+          "singleton":false,
+          "components":[
+             {
+                "name":"redis-server",
+                "description":"",
+                "cloudInfra":{
+                   "replicas":1,
+                   "endpoints":[
+                      {
+                         "name":"REDIS",
+                         "exposeExternally":false,
+                         "port":6379,
+                         "targetPort":6379,
+                         "proto":"TCP"
+                      }
+                   ]
+                },
+                "ros":{
+                   "topics":[
+                      
+                   ],
+                   "services":[
+                      
+                   ],
+                   "actions":[
+                      
+                   ],
+                   "isROS":false
+                },
+                "requiredRuntime":"cloud",
+                "architecture":"amd64",
+                "executables":[
+                   {
+                      "name":"redis",
+                      "simulationOptions":{
+                         "simulation":false
+                      },
+                      "cmd":[
+                         
+                      ],
+                      "docker":"bitnami/redis:6.2.4",
+                      "limits":{
+                         "cpu":2,
+                         "memory":8192
+                      }
+                   }
+                ],
+                "parameters":[
+                   {
+                      "default":"no",
+                      "name":"REDIS_AOF_ENABLED",
+                      "description":""
+                   },
+                   {
+                      "default":"rapyutaio",
+                      "name":"REDIS_PASSWORD",
+                      "description":""
+                   },
+                   {
+                      "default":"no",
+                      "name":"ALLOW_EMPTY_PASSWORD",
+                      "description":""
+                   },
+                   {
+                      "default":"FLUSHALL,CONFIG",
+                      "name":"REDIS_DISABLE_COMMANDS",
+                      "description":""
+                   }
+                ]
+             }
+          ],
+          "includePackages":[
+             
+          ],
+          "dependentDeployments":[
+             
+          ],
+          "inboundROSInterfaces":{
+             "anyIncomingScopedOrTargetedRosConfig":false
+          },
+          "exposedParameters":[
+             
+          ]
+       }
+    ]
+ }

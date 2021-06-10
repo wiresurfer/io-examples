@@ -1,0 +1,86 @@
+{
+    "name":"node-red",
+    "packageVersion":"v1.0.0",
+    "description":"",
+    "bindable":true,
+    "plans":[
+       {
+          "name":"default",
+          "metadata":{
+             
+          },
+          "singleton":false,
+          "components":[
+             {
+                "name":"node-red-cloud",
+                "description":"",
+                "cloudInfra":{
+                   "replicas":1,
+                   "endpoints":[
+                      {
+                         "name":"WEB",
+                         "exposeExternally":true,
+                         "port":443,
+                         "targetPort":1880,
+                         "proto":"HTTPS"
+                      }
+                   ]
+                },
+                "ros":{
+                   "topics":[
+                      
+                   ],
+                   "services":[
+                      
+                   ],
+                   "actions":[
+                      
+                   ],
+                   "isROS":false
+                },
+                "requiredRuntime":"cloud",
+                "architecture":"amd64",
+                "executables":[
+                   {
+                      "name":"node-red-cloud",
+                      "simulationOptions":{
+                         "simulation":false
+                      },
+                      "cmd":[
+                         
+                      ],
+                      "docker":"nodered/node-red",
+                      "limits":{
+                         "cpu":0.5,
+                         "memory":2048
+                      }
+                   }
+                ],
+                "parameters":[
+                   {
+                      "default":"NODE_RED_CREDENTIAL_SECRET",
+                      "name":"NODE_RED_CREDENTIAL_SECRET",
+                      "description":"secret"
+                   }
+                ]
+             }
+          ],
+          "includePackages":[
+             
+          ],
+          "dependentDeployments":[
+             
+          ],
+          "inboundROSInterfaces":{
+             "anyIncomingScopedOrTargetedRosConfig":false
+          },
+          "exposedParameters":[
+             {
+                "component":"node-red-cloud",
+                "param":"NODE_RED_CREDENTIAL_SECRET",
+                "targetParam":"NODE_RED_CREDENTIAL_SECRET"
+             }
+          ]
+       }
+    ]
+ }

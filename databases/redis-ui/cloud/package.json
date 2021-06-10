@@ -1,0 +1,92 @@
+{
+    "name":"Redis UI",
+    "packageVersion":"v1.0.1",
+    "description":"Alpine image for redis-commander - Redis management tool written in node.js",
+    "bindable":true,
+    "plans":[
+       {
+          "name":"default",
+          "metadata":{
+             
+          },
+          "singleton":false,
+          "components":[
+             {
+                "name":"redis-commander",
+                "description":"",
+                "cloudInfra":{
+                   "replicas":1,
+                   "endpoints":[
+                      {
+                         "name":"REDIS_COMMANDER",
+                         "exposeExternally":true,
+                         "port":443,
+                         "targetPort":8081,
+                         "proto":"HTTPS"
+                      }
+                   ]
+                },
+                "ros":{
+                   "topics":[
+                      
+                   ],
+                   "services":[
+                      
+                   ],
+                   "actions":[
+                      
+                   ],
+                   "isROS":false
+                },
+                "requiredRuntime":"cloud",
+                "architecture":"amd64",
+                "executables":[
+                   {
+                      "name":"commander",
+                      "simulationOptions":{
+                         "simulation":false
+                      },
+                      "cmd":[
+                         
+                      ],
+                      "docker":"rediscommander/redis-commander:latest",
+                      "limits":{
+                         "cpu":0.5,
+                         "memory":2048
+                      }
+                   }
+                ],
+                "parameters":[
+                   {
+                      "default":"rapyutaio",
+                      "name":"HTTP_PASSWORD",
+                      "description":""
+                   },
+                   {
+                      "default":"commander",
+                      "name":"HTTP_USER",
+                      "description":""
+                   },
+                   {
+                      "default":"rapyutaio",
+                      "name":"REDIS_PASSWORD",
+                      "description":""
+                   }
+                ]
+             }
+          ],
+          "includePackages":[
+             
+          ],
+          "dependentDeployments":[
+             
+          ],
+          "inboundROSInterfaces":{
+             "anyIncomingScopedOrTargetedRosConfig":false
+          },
+          "exposedParameters":[
+             
+          ]
+       }
+    ]
+ }
