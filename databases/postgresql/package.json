@@ -1,6 +1,6 @@
 {
-    "name":"CVAT on RIO Cloud ",
-    "packageVersion":"v1.3.0",
+    "name":"PostgreSQL 10-alpine",
+    "packageVersion":"v1.0.2",
     "description":"",
     "bindable":true,
     "plans":[
@@ -12,23 +12,16 @@
           "singleton":false,
           "components":[
              {
-                "name":"cvat_server",
+                "name":"postgres",
                 "description":"",
                 "cloudInfra":{
                    "replicas":1,
                    "endpoints":[
                       {
-                         "name":"CVAT_UI",
-                         "exposeExternally":true,
-                         "port":80,
-                         "targetPort":80,
-                         "proto":"HTTP"
-                      },
-                      {
-                         "name":"CVAT",
+                         "name":"POSTGRES",
                          "exposeExternally":false,
                          "proto":"TCP",
-                         "portRange":"8080"
+                         "portRange":"5432"
                       }
                    ]
                 },
@@ -48,49 +41,39 @@
                 "architecture":"amd64",
                 "executables":[
                    {
-                      "name":"cvat_ui",
-                      "simulationOptions":{
-                         "simulation":false
-                      },
-                      "cmd":[
-                         "/bin/bash",
-                         "-c",
-                         "cat /etc/nginx/templates/default.conf.template | envsubst | sed 's/##/\\$/g' > /etc/nginx/conf.d/default.conf && nginx -g 'daemon off;'"
-                      ],
-                      "docker":"shaishavrapyuta/cvat_ui:v1.3.0",
-                      "limits":{
-                         "cpu":0.5,
-                         "memory":2048
-                      }
-                   },
-                   {
-                      "name":"cvat_server",
+                      "name":"postgres",
                       "simulationOptions":{
                          "simulation":false
                       },
                       "cmd":[
                          
                       ],
-                      "docker":"shaishavrapyuta/cvat_server:v1.3.0",
+                      "docker":"postgres:10-alpine",
                       "limits":{
-                         "cpu":2,
-                         "memory":8192
+                         "cpu":1,
+                         "memory":4096
                       }
                    }
                 ],
                 "parameters":[
                    {
-                      "default":"cvat-axylr.ep-r.io",
-                      "name":"CVAT_UI_HOST",
+                      "default":"/var/lib/postgresql/data/pgdata",
+                      "name":"PGDATA",
                       "description":""
                    },
                    {
-                      "default":"*",
-                      "name":"ALLOWED_HOSTS",
+                      "default":"trust",
+                      "name":"POSTGRES_HOST_AUTH_METHOD",
                       "description":""
                    },
                    {
-                      "name":"DJANGO_MODWSGI_EXTRA_ARGS",
+                      "default":"cvat",
+                      "name":"POSTGRES_DB",
+                      "description":""
+                   },
+                   {
+                      "default":"root",
+                      "name":"POSTGRES_USER",
                       "description":""
                    }
                 ]

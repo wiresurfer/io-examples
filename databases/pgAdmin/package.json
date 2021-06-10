@@ -1,6 +1,6 @@
 {
-    "name":"CVAT on RIO Cloud ",
-    "packageVersion":"v1.3.0",
+    "name":"pgAdmin",
+    "packageVersion":"v1.0.1",
     "description":"",
     "bindable":true,
     "plans":[
@@ -12,23 +12,17 @@
           "singleton":false,
           "components":[
              {
-                "name":"cvat_server",
+                "name":"pgadmin",
                 "description":"",
                 "cloudInfra":{
                    "replicas":1,
                    "endpoints":[
                       {
-                         "name":"CVAT_UI",
+                         "name":"endpoint",
                          "exposeExternally":true,
                          "port":80,
                          "targetPort":80,
                          "proto":"HTTP"
-                      },
-                      {
-                         "name":"CVAT",
-                         "exposeExternally":false,
-                         "proto":"TCP",
-                         "portRange":"8080"
                       }
                    ]
                 },
@@ -48,49 +42,29 @@
                 "architecture":"amd64",
                 "executables":[
                    {
-                      "name":"cvat_ui",
-                      "simulationOptions":{
-                         "simulation":false
-                      },
-                      "cmd":[
-                         "/bin/bash",
-                         "-c",
-                         "cat /etc/nginx/templates/default.conf.template | envsubst | sed 's/##/\\$/g' > /etc/nginx/conf.d/default.conf && nginx -g 'daemon off;'"
-                      ],
-                      "docker":"shaishavrapyuta/cvat_ui:v1.3.0",
-                      "limits":{
-                         "cpu":0.5,
-                         "memory":2048
-                      }
-                   },
-                   {
-                      "name":"cvat_server",
+                      "name":"pgadmin",
                       "simulationOptions":{
                          "simulation":false
                       },
                       "cmd":[
                          
                       ],
-                      "docker":"shaishavrapyuta/cvat_server:v1.3.0",
+                      "docker":"dpage/pgadmin4",
                       "limits":{
-                         "cpu":2,
-                         "memory":8192
+                         "cpu":1,
+                         "memory":4096
                       }
                    }
                 ],
                 "parameters":[
                    {
-                      "default":"cvat-axylr.ep-r.io",
-                      "name":"CVAT_UI_HOST",
+                      "default":"pgadmin",
+                      "name":"PGADMIN_DEFAULT_PASSWORD",
                       "description":""
                    },
                    {
-                      "default":"*",
-                      "name":"ALLOWED_HOSTS",
-                      "description":""
-                   },
-                   {
-                      "name":"DJANGO_MODWSGI_EXTRA_ARGS",
+                      "default":"pgadmin@rapyuta-robotics.com",
+                      "name":"PGADMIN_DEFAULT_EMAIL",
                       "description":""
                    }
                 ]
